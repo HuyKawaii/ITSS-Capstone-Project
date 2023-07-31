@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="244.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.DockViewController">
+   <children>
+      <VBox layoutX="6.0" prefHeight="160.0" prefWidth="136.0">
+         <children>
+            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="bt1" mnemonicParsing="false" onAction="#click" text="Button" />
+         </children>
+      </VBox>
+      <TextField fx:id="tf1" layoutX="162.0" layoutY="48.0" />
+   </children>
+</AnchorPane>

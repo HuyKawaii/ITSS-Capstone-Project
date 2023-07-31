@@ -1,4 +1,4 @@
-package entity;
+package application.entity;
 
 enum BikeType{
 	StandardBike,
