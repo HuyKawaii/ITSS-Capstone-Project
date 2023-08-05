@@ -8,4 +8,6 @@ public final class Setting {
 	public static final String DOCK_VIEW_FXML = "/application/resources/DockView.fxml";
 	public static final String DOCK_INFO_VIEW_FXML = "/application/resources/DockInfoView.fxml";
 	public static final String CSS = "/application/application.css";
+	public static final String BIKE_INFO_VIEW_FXML = "/application/resources/BikeInfo.fxml";
+	public static final String BIKE_DETAIL_VIEW_FXML = "/application/resources/BikeDetail.fxml";
 }
