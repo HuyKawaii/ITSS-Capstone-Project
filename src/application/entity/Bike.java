@@ -1,16 +1,22 @@
 package application.entity;
 
-enum BikeType{
-	StandardBike,
-	E_bike,
-	Twin_bike
-}
 
 public class Bike {
+	public enum BikeType{
+		StandardBike,
+		E_bike,
+		Twin_bike
+	}
+
 	private BikeType bikeType;
 	private float rentingTime;
 	private float batteryPercentage;
 	private Dock dock;
+	
+	public Bike(int bikeType) {
+		this.bikeType = BikeType.values()[bikeType];
+		batteryPercentage = 100;
+	}
 	
 	public Dock getDock() {
 		return dock;
@@ -53,6 +59,9 @@ public class Bike {
 			fee = fee * 1.5;
 		
 		return fee;
+	}
+	public String getBikeStatus() {
+		return bikeType.toString() + "\n" + (bikeType == BikeType.E_bike ? batteryPercentage + "%\n" : "");
 	}
 	
 	

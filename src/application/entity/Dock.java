@@ -1,5 +1,6 @@
 package application.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,12 @@ public class Dock {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public int getDockSize() {
+		return dockSize;
+	}
+	public void setDockSize(int dockSize) {
+		this.dockSize = dockSize;
+	}
 	public List<Bike> getListOfBikesBike() {
 		return listOfBikesBike;
 	}
@@ -31,10 +38,17 @@ public class Dock {
 		if (!isFreeSpotAvailable())
 			return false;
 		listOfBikesBike.add(bike);
+		bike.setDock(this);
 		return true;
 	}
 	public boolean removeBikeFromDock(Bike bike) {
 		return listOfBikesBike.remove(bike);
+	}
+	public List<Bike> getAllBikes(){
+		return listOfBikesBike;
+	}
+	public String getDockStatus() {
+		return name + "\n" + address + "\n" + listOfBikesBike.size() + "/" + dockSize;
 	}
 
 }
