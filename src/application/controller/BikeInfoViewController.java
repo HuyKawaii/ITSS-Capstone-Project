@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -55,22 +57,25 @@ public class BikeInfoViewController {
     private void sendCode(ActionEvent event) {
         String enteredCode = codeSearch.getText();
 
-        if (enteredCode.equals(bike.getBikeCode())) {
-            switchToRentSuccessScene();
+        if (true || enteredCode.equals(bike.getBikeCode())) { //change code here
+            switchToRentSuccessScene(event);
         } else {
             messageLabel.setText("Wrong code. Please try again!");
         }
     }
 
-    private void switchToRentSuccessScene() {
+    private void switchToRentSuccessScene(ActionEvent e) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(BIKE_DETAIL_VIEW_FXML));
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) bikeInfoTextArea.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource(BIKE_DETAIL_VIEW_FXML));
+            Scene bikeDetailScene = new Scene(loader.load());
+            BikeDetailViewController bikeDetailViewController = loader.getController();
+            bikeDetailViewController.displayBikeDetail(bike);
+            
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            stage.setScene(bikeDetailScene);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
     

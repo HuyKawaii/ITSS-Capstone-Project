@@ -10,4 +10,6 @@ public final class Setting {
 	public static final String CSS = "/application/application.css";
 	public static final String BIKE_INFO_VIEW_FXML = "/application/resources/BikeInfo.fxml";
 	public static final String BIKE_DETAIL_VIEW_FXML = "/application/resources/BikeDetail.fxml";
+	public static final String CARD_INFORMATION_VIEW_FXML = "/application/resources/CardInfomation.fxml";
+	public static final String PAYMENT_TRANSACTION_VIEW_FXML = "/application/resources/paymentTransaction.fxml";
 }

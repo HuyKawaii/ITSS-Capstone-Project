@@ -10,6 +10,7 @@ public class Bike {
 	}
 
 	private BikeType bikeType;
+	private float price;
 	private float rentingTime;
 	private float batteryPercentage;
 	private float timeRemain;
@@ -24,6 +25,14 @@ public class Bike {
 		this.batteryPercentage = 100;
 		this.rentingTime = 0;
 		this.timeRemain = 120;
+	}
+	
+	public float getPrice() {
+		return price;
+	}
+	
+	public float getDeposit() {
+		return price * (float)0.4;
 	}
 	
 	public Dock getDock() {
