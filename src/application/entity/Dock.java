@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dock {
+	private int dockId;
 	private String name;
 	private String address;
 	private List<Bike> listOfBikesBike = new ArrayList<Bike>();
@@ -49,6 +50,12 @@ public class Dock {
 	}
 	public String getDockStatus() {
 		return name + "\n" + address + "\n" + listOfBikesBike.size() + "/" + dockSize;
+	}
+	public int getDockId() {
+		return dockId;
+	}
+	public void setDockId(int dockId) {
+		this.dockId = dockId;
 	}
 
 }
