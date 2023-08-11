@@ -1,5 +1,6 @@
 package application.entity;
 
+import java.util.Random;
 
 public class Bike {
 	public enum BikeType{
@@ -11,11 +12,18 @@ public class Bike {
 	private BikeType bikeType;
 	private float rentingTime;
 	private float batteryPercentage;
+	private float timeRemain;
 	private Dock dock;
+	private String bikeCode;
+	private String brand;
+	
+	private static final float MAX_TIME = 120;
 	
 	public Bike(int bikeType) {
 		this.bikeType = BikeType.values()[bikeType];
-		batteryPercentage = 100;
+		this.batteryPercentage = 100;
+		this.rentingTime = 0;
+		this.timeRemain = 120;
 	}
 	
 	public Dock getDock() {
@@ -40,6 +48,8 @@ public class Bike {
 
 	public void setRentingTime(float rentingTime) {
 		this.rentingTime = rentingTime;
+		this.timeRemain = MAX_TIME - rentingTime;
+		this.batteryPercentage = (this.timeRemain / MAX_TIME) * 100;
 	}
 
 	public float getBatteryPercentage() {
@@ -64,6 +74,33 @@ public class Bike {
 		return bikeType.toString() + "\n" + (bikeType == BikeType.E_bike ? batteryPercentage + "%\n" : "");
 	}
 	
-	
+	public void generateBikeCode() {
+		Random rnd = new Random();
+		int number = rnd.nextInt(999999);
+		this.setBikeCode(String.format("%06d", number));
+	}
 
+	public String getBikeCode() {
+		return bikeCode;
+	}
+
+	public void setBikeCode(String bikeCode) {
+		this.bikeCode = bikeCode;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public float getTimeRemain() {
+		return timeRemain;
+	}
+
+	public void setTimeRemain(int timeRemain) {
+		this.timeRemain = timeRemain;
+	}
 }
