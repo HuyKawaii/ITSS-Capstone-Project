@@ -24,9 +24,9 @@ BEGIN
     IF NEW.bikeType = 1 THEN
         NEW.price := 400000;
     ELSIF NEW.bikeType = 2 THEN
-        NEW.price := 550000;
-    ELSIF NEW.bikeType = 3 THEN
         NEW.price := 700000;
+    ELSIF NEW.bikeType = 3 THEN
+        NEW.price := 550000;
     END IF;
 	NEW.bikeCode := LPAD(FLOOR(RANDOM() * 999999)::TEXT, 6, '0');
     RETURN NEW;

@@ -18,6 +18,7 @@ public class Bike {
 	private String bikeCode;
 	private String brand;
 	private LocalDateTime rentedTime;
+	private boolean status;
 	
 	private static final float MAX_TIME = 120;
 	
@@ -26,6 +27,24 @@ public class Bike {
 		this.batteryPercentage = 100;
 		this.rentingTime = 0;
 		this.timeRemain = MAX_TIME;
+		this.status=true;
+		setPrice();
+	}
+	
+	private void setPrice() {
+		switch (bikeType) {
+			case StandardBike:
+				this.price = 400000.0f;
+				break;
+			case E_bike:
+				this.price = 700000.0f;
+				break;
+			case Twin_bike:
+				this.price = 550000.0f;
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid bike type");
+		}
 	}
 	
 	public float getPrice() {
@@ -50,6 +69,10 @@ public class Bike {
 
 	public void setBikeType(BikeType bikeType) {
 		this.bikeType = bikeType;
+	}
+	
+	public void removeFromDock() {
+	    this.dock = null;
 	}
 
 	public float getRentingTime() {
@@ -114,15 +137,26 @@ public class Bike {
 		this.bikeId = bikeId;
 	}
 	
-	public float getPrice() {
-		return price;
-	}
-	
 	public void setPrice(float price) {
 		this.price = price;
 	}
 
-	public float getDeposit() {
-		return price * (float)0.4;
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	public double getRetingFee() {
+		double fee = 10000;
+		if (rentingTime > 30)
+			fee = Math.ceil((rentingTime - 30)/15) * 3000;
+		
+		if (bikeType == BikeType.E_bike || bikeType == BikeType.Twin_bike)
+			fee = fee * 1.5;
+		
+		return fee;
 	}
 }

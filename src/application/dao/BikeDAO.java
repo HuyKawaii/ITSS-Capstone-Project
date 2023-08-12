@@ -53,8 +53,9 @@ public class BikeDAO {
     }
 
     public void updateBike(Bike bike) {
-    	System.out.print(bike.getBikeCode());
-        String query = "UPDATE bikes SET rentingTime = ?, batteryPercentage = ?, timeRemain = ?, bikeCode = ?, rentedTime = ? WHERE bike_id = ?";
+        System.out.print(bike.getBikeCode());
+        
+        String query = "UPDATE bikes SET rentingTime = ?, batteryPercentage = ?, timeRemain = ?, bikeCode = ?, rentedTime = ?, dockId = ? WHERE bike_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -68,15 +69,22 @@ public class BikeDAO {
             } else {
                 pstmt.setNull(5, java.sql.Types.TIMESTAMP);
             }
-            pstmt.setInt(6, bike.getBikeId());
-            System.out.println(bike.getBikeId());
+            
+            if (bike.getDock() != null) {
+                pstmt.setInt(6, bike.getDock().getDockId());
+            } else {
+                pstmt.setNull(6, java.sql.Types.INTEGER);
+            }
+            
+            pstmt.setInt(7, bike.getBikeId());
+
             System.out.println(pstmt.toString());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         System.out.print(bike.getBikeCode());
     }
-
 }

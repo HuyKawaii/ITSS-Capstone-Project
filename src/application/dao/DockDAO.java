@@ -24,6 +24,7 @@ public class DockDAO {
             ResultSet dockRs = dockPstmt.executeQuery();
             while (dockRs.next()) {
                 Dock dock = new Dock();
+                dock.setDockId(dockRs.getInt("dock_id"));
                 dock.setName(dockRs.getString("name"));
                 dock.setAddress(dockRs.getString("address"));
                 dock.setDockSize(dockRs.getInt("dock_size"));

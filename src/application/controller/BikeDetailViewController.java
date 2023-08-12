@@ -1,4 +1,5 @@
 package application.controller;
+import static application.entity.Bike.BikeType.StandardBike;
 import static application.util.Setting.*;
 
 import application.entity.*;
@@ -16,16 +17,22 @@ import java.io.IOException;
 
 
 public class BikeDetailViewController {
-    Bike bike;
+    Bike bike = new Bike(1);
     @FXML
     private TableView<Bike> tblBikeDetail;
     @FXML
-    private TableColumn<Bike, Double> priceColumn; // Reference to the TableColumn defined in the FXML
+    private TableColumn<Bike, Float> priceColumn; // Reference to the TableColumn defined in the FXML
     @FXML
-    private TableColumn<Bike, Double> depositColumn; // Reference to the TableColumn defined in the FXML
+    private TableColumn<Bike, Float> depositColumn; // Reference to the TableColumn defined in the FXML
 
     void displayBikeDetail(Bike bike) {
     	this.bike = bike;
+//        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
+//        tblBikeDetail.getItems().add(bike);
+    }
+    @FXML
+    void initialize() {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
         tblBikeDetail.getItems().add(bike);

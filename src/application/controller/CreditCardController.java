@@ -1,4 +1,5 @@
 package application.controller;
+
 import static application.util.Setting.*;
 
 import application.entity.PaymentTransaction;
@@ -43,29 +44,35 @@ public class CreditCardController {
         // Create a new CreditCard instance with the retrieved values
         CreditCard card = new CreditCard(cardHolderName, cardNumber, securityCode, expirationDate, issuingBank);
         //if (!card.isExpired() && card.isValidCardNumber()) {
-            //if (checkSufficientBalance(card, bike.getDeposit())) {
-                if (card.isStatus()) {
-                    PaymentTransaction paymentTransaction = new PaymentTransaction("Rent", bike.getDeposit(), card);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(PAYMENT_TRANSACTION_VIEW_FXML));
-                    Parent root = loader.load();
+        //if (checkSufficientBalance(card, bike.getDeposit())) {
+//                if (card.isStatus()) {
+        PaymentTransaction paymentTransaction;
+        if (this.bike.isStatus()) {
+            paymentTransaction = new PaymentTransaction("Rent", bike, card);
+            System.out.println(paymentTransaction.getCard().getCardNumber());
+        } else {
+            paymentTransaction = new PaymentTransaction("Return", bike, card);
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PAYMENT_TRANSACTION_VIEW_FXML));
+        Parent root = loader.load();
 
-                    PaymentTransactionController paymentTransactionController = loader.getController();
-                    paymentTransactionController.setPaymentTransaction(paymentTransaction);
+        PaymentTransactionController paymentTransactionController = loader.getController();
+        paymentTransactionController.setPaymentTransaction(paymentTransaction);
 
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
-                    stage.setTitle("Payment Transaction");
-                    stage.show();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Payment Transaction");
+        stage.show();
 
 
-                } else {
-                    // Create and show an alert informing the user they need to return the bike first
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Alert");
-                    alert.setHeaderText(null);
-                    alert.setContentText("You cannot rent another bike until you return the current one.");
-                    alert.showAndWait();
-                }
+//                } else {
+        // Create and show an alert informing the user they need to return the bike first
+//                    Alert alert = new Alert(Alert.AlertType.WARNING);
+//                    alert.setTitle("Alert");
+//                    alert.setHeaderText(null);
+//                    alert.setContentText("You cannot rent another bike until you return the current one.");
+//                    alert.showAndWait();
+
 //            } else {
 //                // Create and show an alert informing the user that their balance is not sufficient
 //                Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -83,9 +90,7 @@ public class CreditCardController {
 //            alert.showAndWait();
 //        }
     }
-
-    public boolean checkSufficientBalance(CreditCard card, double deposit) {
-        double balance = card.getBalance();
-        return balance >= deposit;
-    }
 }
+
+
+

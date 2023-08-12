@@ -46,7 +46,8 @@ public class BikeInfoViewController {
 
     public void displayBikeInfo(Bike bike) {
         this.bike = bike;
-        System.out.println("Bike Details: " + bike.getBrand()+ ", " + bike.getPrice());
+        System.out.println(bike.getDock().getDockId());
+//        System.out.println("Bike Details: " + bike.getBrand()+ ", " + bike.getPrice());
         String bikeInfo = "Brand: " + bike.getBrand() + "\n" +
                           "Type: " + bike.getBikeType() + "\n" +
                           "Battery Percentage: " + bike.getBatteryPercentage() + "%\n" +
@@ -68,6 +69,7 @@ public class BikeInfoViewController {
         if (!hasCodeBeenReceived) {
             bikeCodeLabel.setText(bike.getBikeCode());
             hasCodeBeenReceived = true;
+//            System.out.println(bike.getDock().getDockId());
         } else {
             bikeController.generateBikeCode(bike);// Generate new code on second press
             bikeController.updateBike(bike);

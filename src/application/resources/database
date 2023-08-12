@@ -15,7 +15,8 @@ CREATE TABLE bikes (
     dockId INTEGER REFERENCES docks(dock_id),       
     bikeCode VARCHAR(6) UNIQUE,
     brand VARCHAR(255),
-    rentedTime TIMESTAMP WITHOUT TIME ZONE
+    rentedTime TIMESTAMP WITHOUT TIME ZONE,
+    status BOOLEAN
 );
 
 CREATE OR REPLACE FUNCTION set_bike_price()
@@ -24,9 +25,9 @@ BEGIN
     IF NEW.bikeType = 1 THEN
         NEW.price := 400000;
     ELSIF NEW.bikeType = 2 THEN
-        NEW.price := 700000;
-    ELSIF NEW.bikeType = 3 THEN
         NEW.price := 550000;
+    ELSIF NEW.bikeType = 3 THEN
+        NEW.price := 700000;
     END IF;
 	NEW.bikeCode := LPAD(FLOOR(RANDOM() * 999999)::TEXT, 6, '0');
     RETURN NEW;
