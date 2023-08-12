@@ -1,5 +1,7 @@
 package application.dao;
 
+import application.entity.BikeFactory;
+import application.entity.EBike;
 import application.entity.Bike;
 import application.util.DBConnection;
 
@@ -16,18 +18,24 @@ public class BikeDAO {
     public Bike getBikeById(int id) {
         Bike bike = null;
         String query = "SELECT * FROM bikes WHERE bike_id = ?";
+        BikeFactory bikeFactory = new BikeFactory();
+        
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-            	int bikeTypeOrdinal = rs.getInt("bikeType");
-            	bike = new Bike(bikeTypeOrdinal);
+                String bikeType = rs.getString("bikeType");
+                bike = bikeFactory.createBike(bikeType);
                 bike.setRentingTime(rs.getFloat("rentingTime"));
-                bike.setBatteryPercentage(rs.getFloat("batteryPercentage"));
-                bike.setTimeRemain(rs.getInt("timeRemain"));
+                if(bike instanceof EBike) {
+                    ((EBike)bike).setBatteryPercentage(rs.getFloat("batteryPercentage"));
+                    ((EBike)bike).setTimeRemain(rs.getFloat("timeRemain"));
+                }
+
                 bike.setBikeCode(rs.getString("bikeCode"));
                 bike.setBrand(rs.getString("brand"));
+                bike.setPlate(rs.getString("plate"));
                 bike.setRentedTime(rs.getTimestamp("rentedTime").toLocalDateTime());
             }
         } catch (SQLException e) {
@@ -55,28 +63,40 @@ public class BikeDAO {
     public void updateBike(Bike bike) {
         System.out.print(bike.getBikeCode());
         
-        String query = "UPDATE bikes SET rentingTime = ?, batteryPercentage = ?, timeRemain = ?, bikeCode = ?, rentedTime = ?, dockId = ? WHERE bike_id = ?";
-
+        StringBuilder query = new StringBuilder("UPDATE bikes SET rentingTime = ?, bikeCode = ?, rentedTime = ?, dockId = ?");
+        
+        if(bike instanceof EBike) {
+            query.append(", batteryPercentage = ?, timeRemain = ?");
+        }
+        
+        query.append(" WHERE bike_id = ?");
+        
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+             
+            int paramIndex = 1;
             
-            pstmt.setFloat(1, bike.getRentingTime());
-            pstmt.setFloat(2, bike.getBatteryPercentage());
-            pstmt.setFloat(3, bike.getTimeRemain());
-            pstmt.setString(4, bike.getBikeCode());
+            pstmt.setFloat(paramIndex++, bike.getRentingTime());
+            pstmt.setString(paramIndex++, bike.getBikeCode());
+            
             if (bike.getRentedTime() != null) {
-                pstmt.setTimestamp(5, Timestamp.valueOf(bike.getRentedTime()));
+                pstmt.setTimestamp(paramIndex++, Timestamp.valueOf(bike.getRentedTime()));
             } else {
-                pstmt.setNull(5, java.sql.Types.TIMESTAMP);
+                pstmt.setNull(paramIndex++, java.sql.Types.TIMESTAMP);
             }
             
             if (bike.getDock() != null) {
-                pstmt.setInt(6, bike.getDock().getDockId());
+                pstmt.setInt(paramIndex++, bike.getDock().getDockId());
             } else {
-                pstmt.setNull(6, java.sql.Types.INTEGER);
+                pstmt.setNull(paramIndex++, java.sql.Types.INTEGER);
             }
             
-            pstmt.setInt(7, bike.getBikeId());
+            if(bike instanceof EBike) {
+                pstmt.setFloat(paramIndex++, ((EBike)bike).getBatteryPercentage());
+                pstmt.setFloat(paramIndex++, ((EBike)bike).getTimeRemain());
+            }
+            
+            pstmt.setInt(paramIndex++, bike.getBikeId());
 
             System.out.println(pstmt.toString());
 
@@ -87,4 +107,5 @@ public class BikeDAO {
         
         System.out.print(bike.getBikeCode());
     }
+
 }

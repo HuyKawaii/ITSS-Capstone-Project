@@ -1,5 +1,5 @@
 package application.controller;
-import static application.entity.Bike.BikeType.StandardBike;
+//import static application.entity.Bike.BikeType.StandardBike;
 import static application.util.Setting.*;
 
 import application.entity.*;
@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 public class BikeDetailViewController {
-    Bike bike = new Bike(1);
+	Bike bike = null;
     @FXML
     private TableView<Bike> tblBikeDetail;
     @FXML
@@ -27,6 +27,8 @@ public class BikeDetailViewController {
 
     void displayBikeDetail(Bike bike) {
     	this.bike = bike;
+    	tblBikeDetail.getItems().clear();  // Clear existing bike details.
+        tblBikeDetail.getItems().add(bike); // Add the new bike's details.
 //        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 //        depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
 //        tblBikeDetail.getItems().add(bike);
@@ -35,7 +37,7 @@ public class BikeDetailViewController {
     void initialize() {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
-        tblBikeDetail.getItems().add(bike);
+//        tblBikeDetail.getItems().add(bike);
     }
     
     @FXML

@@ -2,7 +2,6 @@ package application.controller;
 import static application.util.Setting.*;
 
 import application.entity.Bike;
-import application.entity.Bike.BikeType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -46,18 +45,18 @@ public class BikeInfoViewController {
 
     public void displayBikeInfo(Bike bike) {
         this.bike = bike;
-        System.out.println(bike.getDock().getDockId());
-//        System.out.println("Bike Details: " + bike.getBrand()+ ", " + bike.getPrice());
+
         String bikeInfo = "Brand: " + bike.getBrand() + "\n" +
                           "Type: " + bike.getBikeType() + "\n" +
-                          "Battery Percentage: " + bike.getBatteryPercentage() + "%\n" +
-                          "Estimated Time Remain: " + bike.getTimeRemain() + " minutes";
-        
+                          "License Plate: " + bike.getPlate() + "\n" +
+                          bike.getAdditionalInfo(); 
+
         bikeInfoTextArea.setText(bikeInfo);
         setImageBasedOnBikeType(bike.getBikeType());
     }
+
     
-    private void setImageBasedOnBikeType(BikeType bikeType) {
+    private void setImageBasedOnBikeType(String bikeType) {
     	String imagePath = "pictures/" + bikeType + ".png";
         System.out.println("Loading image from: " + imagePath);
         Image image = new Image(getClass().getResourceAsStream(imagePath));
