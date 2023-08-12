@@ -2,11 +2,14 @@ package application.controller;
 import static application.util.Setting.*;
 
 import application.entity.Bike;
+import application.entity.Bike.BikeType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,8 +30,13 @@ public class BikeInfoViewController {
     
     @FXML
     TextField codeSearch;
+    
+    @FXML
+    ImageView bikeImage;
 
     private Bike bike;
+    private BikeController bikeController = new BikeController();
+    private boolean hasCodeBeenReceived = false; 
     
     private Scene previousScene;
     
@@ -38,26 +46,40 @@ public class BikeInfoViewController {
 
     public void displayBikeInfo(Bike bike) {
         this.bike = bike;
-
+        System.out.println("Bike Details: " + bike.getBrand()+ ", " + bike.getPrice());
         String bikeInfo = "Brand: " + bike.getBrand() + "\n" +
                           "Type: " + bike.getBikeType() + "\n" +
                           "Battery Percentage: " + bike.getBatteryPercentage() + "%\n" +
                           "Estimated Time Remain: " + bike.getTimeRemain() + " minutes";
         
         bikeInfoTextArea.setText(bikeInfo);
+        setImageBasedOnBikeType(bike.getBikeType());
+    }
+    
+    private void setImageBasedOnBikeType(BikeType bikeType) {
+    	String imagePath = "pictures/" + bikeType + ".png";
+        System.out.println("Loading image from: " + imagePath);
+        Image image = new Image(getClass().getResourceAsStream(imagePath));
+        bikeImage.setImage(image);
     }
     
     @FXML 
     private void receiveCode(ActionEvent event) {
-    	bike.generateBikeCode();
-        bikeCodeLabel.setText(bike.getBikeCode());
+        if (!hasCodeBeenReceived) {
+            bikeCodeLabel.setText(bike.getBikeCode());
+            hasCodeBeenReceived = true;
+        } else {
+            bikeController.generateBikeCode(bike);// Generate new code on second press
+            bikeController.updateBike(bike);
+            bikeCodeLabel.setText(bike.getBikeCode());
+        }
     }
     
     @FXML
     private void sendCode(ActionEvent event) {
         String enteredCode = codeSearch.getText();
 
-        if (true || enteredCode.equals(bike.getBikeCode())) { //change code here
+        if (enteredCode.equals(bike.getBikeCode())) {
             switchToRentSuccessScene(event);
         } else {
             messageLabel.setText("Wrong code. Please try again!");
@@ -70,10 +92,9 @@ public class BikeInfoViewController {
             Scene bikeDetailScene = new Scene(loader.load());
             BikeDetailViewController bikeDetailViewController = loader.getController();
             bikeDetailViewController.displayBikeDetail(bike);
-            
+          
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.setScene(bikeDetailScene);
-            
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -1,74 +1,65 @@
 package application.controller;
-import application.entity.*;
+
+import application.dao.BikeDAO;
+import application.entity.Bike;
+import java.time.LocalDateTime;
+import java.time.Duration;
+import java.util.Random;
 
 public class BikeController {
-	// resolve control coupling
-	// only passing enough parameters, not the whole object
-//	public void returnStandardBike(float rentTime, float depositeMoney,Card userCard) {
-//		float rentFees = 0;
-//		if(rentTime >= 10) {
-//			rentFees = standardBikeRentFee(rentTime);	
-//		}else {
-//			rentFees = 0; 
-//		}
-//		float returnMoney = depositeMoney - rentFees;
-//		// calll deduce money api
-//		// 
-//		System.out.println("rent fee : " + rentFees + "$");
-////		System.out.println("deduct money of standard bike: " + returnMoney + " $");
-//	}
-//	
-//	public void returnE_Bike(float rentTime, float depositeMoney, Card userCard) {
-//		float rentFees = 0;
-//		if(rentTime >= 10) {
-//			rentFees = E_BikeRentFee(rentTime);	
-//		}else {
-//			rentFees = 0; 
-//		}
-//		float returnMoney = depositeMoney - rentFees;
-//		// calll deduce money api
-//		// 
-//		System.out.println("deduct money of e bike: " + returnMoney + " $");
-//	}
-//	
-//	public void returnTwinBike(float rentTime, float depositeMoney, Card userCard) {
-//		float rentFees = 0;
-//		if(rentTime >= 10) {
-//			rentFees = TwinBikeRentFee(rentTime);	
-//		}else {
-//			rentFees = 0; 
-//		}
-//		float returnMoney = depositeMoney - rentFees;
-//		// calll deduce money api
-//		// 
-//		System.out.println("deduct money of twin bike: " + returnMoney + " $");
-//	}
-//	
-//	private float standardBikeRentFee(float rentTime) {
-//		if(rentTime <= 30) {
-//			return (float)10000;
-//		}else {
-//			float fees = 10000;
-//			float temp = rentTime - 30;
-//			
-//			int factor = (int) (temp / 15);
-//			float remainder = (temp % 15);
-//			
-//			if(remainder == 0) {
-//				fees += factor * 3000;
-//			}else {
-//				fees += (factor + 1) * 3000;
-//			}
-//			return fees;
-//		}	
-//	}
-//	
-//	private float E_BikeRentFee(float rentTime) {
-//		return (float) (standardBikeRentFee(rentTime) * 1.5);
-//	}
-//	
-//	private float TwinBikeRentFee(float rentTime) {
-//		return (float)(standardBikeRentFee(rentTime) * 1.5);
-//	}
+    private final BikeDAO dao;
+
+    public BikeController() {
+        this.dao = new BikeDAO();
+    }
+    
+    public void updateBike(Bike bike) {
+        dao.updateBike(bike);
+    }
+
+    public void generateBikeCode(Bike bike) {
+        String code = generateRandomCode();
+        
+        while (bikeCodeExists(code)) {
+            code = generateRandomCode();
+        }
+        
+        bike.setBikeCode(code);
+    }
+    
+    private String generateRandomCode() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        return String.format("%06d", number);
+    }
+    
+    private boolean bikeCodeExists(String code) {
+        return dao.bikeCodeExists(code);
+    }
+
+    public void rentBike(Bike bike) {
+        try {
+            bike.setRentedTime(LocalDateTime.now());
+            generateBikeCode(bike);
+            updateBike(bike);  
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void returnBike(Bike bike) {
+        try {
+            if (bike.getRentedTime() != null) {
+                Duration duration = Duration.between(bike.getRentedTime(), LocalDateTime.now());
+                float rentedDuration = (float) duration.toMinutes();
+                bike.setRentingTime(rentedDuration);
+                bike.setRentedTime(null);
+                updateBike(bike);
+            }
+        } catch (Exception e) {
+       
+            e.printStackTrace();
+        }
+    }
 }
 

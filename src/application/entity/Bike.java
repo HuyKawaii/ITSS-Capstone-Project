@@ -1,6 +1,6 @@
 package application.entity;
 
-import java.util.Random;
+import java.time.LocalDateTime;
 
 public class Bike {
 	public enum BikeType{
@@ -8,7 +8,7 @@ public class Bike {
 		E_bike,
 		Twin_bike
 	}
-
+	private int bikeId;
 	private BikeType bikeType;
 	private float price;
 	private float rentingTime;
@@ -17,14 +17,15 @@ public class Bike {
 	private Dock dock;
 	private String bikeCode;
 	private String brand;
+	private LocalDateTime rentedTime;
 	
 	private static final float MAX_TIME = 120;
 	
 	public Bike(int bikeType) {
-		this.bikeType = BikeType.values()[bikeType];
+		this.bikeType = BikeType.values()[bikeType-1];
 		this.batteryPercentage = 100;
 		this.rentingTime = 0;
-		this.timeRemain = 120;
+		this.timeRemain = MAX_TIME;
 	}
 	
 	public float getPrice() {
@@ -69,24 +70,8 @@ public class Bike {
 		this.batteryPercentage = batteryPercentage;
 	}
 
-	public double getRetingFee() {
-		double fee = 10000;
-		if (rentingTime > 30)
-			fee = Math.ceil((rentingTime - 30)/15) * 3000;
-		
-		if (bikeType == BikeType.E_bike || bikeType == BikeType.Twin_bike)
-			fee = fee * 1.5;
-		
-		return fee;
-	}
 	public String getBikeStatus() {
 		return bikeType.toString() + "\n" + (bikeType == BikeType.E_bike ? batteryPercentage + "%\n" : "");
-	}
-	
-	public void generateBikeCode() {
-		Random rnd = new Random();
-		int number = rnd.nextInt(999999);
-		this.setBikeCode(String.format("%06d", number));
 	}
 
 	public String getBikeCode() {
@@ -111,5 +96,33 @@ public class Bike {
 
 	public void setTimeRemain(int timeRemain) {
 		this.timeRemain = timeRemain;
+	}
+	
+	public LocalDateTime getRentedTime() {
+	    return rentedTime;
+	}
+
+	public void setRentedTime(LocalDateTime rentedTime) {
+	    this.rentedTime = rentedTime;
+	}
+
+	public int getBikeId() {
+		return bikeId;
+	}
+
+	public void setBikeId(int bikeId) {
+		this.bikeId = bikeId;
+	}
+	
+	public float getPrice() {
+		return price;
+	}
+	
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public float getDeposit() {
+		return price * (float)0.4;
 	}
 }

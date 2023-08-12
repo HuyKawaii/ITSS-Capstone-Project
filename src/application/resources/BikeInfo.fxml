@@ -17,7 +17,6 @@
             <Button mnemonicParsing="false" onAction="#sendCode" text="SEND CODE" />
          </children>
       </HBox>
-      <ImageView fx:id="image" fitHeight="225.0" fitWidth="311.0" layoutX="22.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
       <TextArea fx:id="bikeInfoTextArea" layoutX="329.0" layoutY="91.0" prefHeight="200.0" prefWidth="223.0" />
       <Button layoutX="395.0" layoutY="302.0" mnemonicParsing="false" onAction="#receiveCode" text="RECEIVE CODE" />
       <Label fx:id="bikeCodeLabel" alignment="CENTER" layoutX="378.0" layoutY="338.0" prefHeight="17.0" prefWidth="129.0">
@@ -26,5 +25,6 @@
          </font></Label>
       <Label fx:id="messageLabel" layoutX="349.0" layoutY="45.0" textFill="RED" />
       <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#returnToPreviousScene" text="&lt;&lt; Return" />
+      <ImageView fx:id="bikeImage" fitHeight="200.0" fitWidth="261.0" layoutX="32.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

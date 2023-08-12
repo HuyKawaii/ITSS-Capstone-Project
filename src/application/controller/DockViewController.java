@@ -48,9 +48,10 @@ public class DockViewController implements Initializable {
 		for (int i = 0; i < NUMBER_OF_DOCKS; i++) {
 			tx[i].setText("");
 		}
-		
+		System.out.println(listOfDocks.size());
 		for (int i = 0; i < listOfDocks.size(); i++) 
 		{
+			
 			tx[i].setText(listOfDocks.get(i).getDockStatus());
 		}
 	}
