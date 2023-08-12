@@ -8,7 +8,7 @@ public class ReturnController {
 		this.returner = returner;
 	}
 	
-	public void proceedReturnBike(Bike bike, float deposite, Card card) {
-		returner.returnBike(bike, deposite, card);
+	public void proceedReturnBike(Bike bike, Dock dock, float deposite, Card card) {
+		returner.returnBike(bike, dock,deposite, card);
 	}
 }

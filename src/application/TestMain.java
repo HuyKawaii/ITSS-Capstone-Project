@@ -2,6 +2,7 @@ package application;
 import application.controller.*;
 import application.entity.*;
 
+
 public class TestMain {
 
 	public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class TestMain {
 		b.setRentingTime(70);
 		
 		ReturnController r = new ReturnController(new ReturnStdBike());
-		r.proceedReturnBike(b, 100000, null);
+		r.proceedReturnBike(b, new Dock(),100000, null);
 	}	
 
 }
