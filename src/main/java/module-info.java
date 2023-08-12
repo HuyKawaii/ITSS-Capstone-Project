@@ -1,14 +1,14 @@
-module com.example.testjavafx {
+module application {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.testjavafx to javafx.fxml;
-    opens com.example.testjavafx.controller to javafx.fxml;
-    exports com.example.testjavafx;
-    exports com.example.testjavafx.controller;
-    exports com.example.testjavafx.screen;
-    opens com.example.testjavafx.screen to javafx.fxml;
-    opens com.example.testjavafx.entities to javafx.base;
+    opens application to javafx.fxml, javafx.graphics;
+    opens application.controller to javafx.fxml;
+    opens application.entity to javafx.base;
+    opens application.subsystem to javafx.base;
+    exports application;
+    exports application.controller;
+    exports application.util;
 
 }
