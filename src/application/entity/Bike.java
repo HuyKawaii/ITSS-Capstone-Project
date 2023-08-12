@@ -114,15 +114,7 @@ public class Bike {
 		this.bikeId = bikeId;
 	}
 	
-	public float getPrice() {
-		return price;
-	}
-	
 	public void setPrice(float price) {
 		this.price = price;
-	}
-
-	public float getDeposit() {
-		return price * (float)0.4;
 	}
 }
