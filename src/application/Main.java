@@ -81,6 +81,7 @@ public class Main extends Application {
 			dockViewController = loader.getController();
 			dockViewController.setDockController(dockController);
 			dockViewController.displayDocks();
+	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
