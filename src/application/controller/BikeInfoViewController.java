@@ -80,8 +80,6 @@ public class BikeInfoViewController {
         String enteredCode = codeSearch.getText();
 
         if (enteredCode.equals(bike.getBikeCode())) {
-//            bikeController.generateBikeCode(bike);
-//            bikeController.updateBike(bike);
             switchToRentSuccessScene(event);
         } else {
             messageLabel.setText("Wrong code. Please try again!");
@@ -94,10 +92,9 @@ public class BikeInfoViewController {
             Scene bikeDetailScene = new Scene(loader.load());
             BikeDetailViewController bikeDetailViewController = loader.getController();
             bikeDetailViewController.displayBikeDetail(bike);
-
+          
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.setScene(bikeDetailScene);
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

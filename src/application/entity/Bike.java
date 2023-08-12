@@ -28,6 +28,14 @@ public class Bike {
 		this.timeRemain = MAX_TIME;
 	}
 	
+	public float getPrice() {
+		return price;
+	}
+	
+	public float getDeposit() {
+		return price * (float)0.4;
+	}
+	
 	public Dock getDock() {
 		return dock;
 	}
