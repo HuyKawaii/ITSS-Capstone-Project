@@ -5,6 +5,10 @@ import application.subsystem.Response;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+<<<<<<< Updated upstream
+=======
+import javafx.scene.Node;
+>>>>>>> Stashed changes
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -80,6 +84,13 @@ public class ResponseController {
 
             BikeDetailWhileRentingController bikeDetailWhileRentingController = loader.getController();
             bikeDetailWhileRentingController.setBike(this.response.getTransaction().getBike());
+<<<<<<< Updated upstream
+=======
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close(); // Close the current stage
+
+>>>>>>> Stashed changes
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Bike Detail while renting");

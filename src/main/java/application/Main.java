@@ -1,4 +1,5 @@
 package application;
+<<<<<<< Updated upstream
 	
 import static application.util.Setting.*;
 
@@ -11,12 +12,30 @@ import application.controller.DockController;
 import application.controller.DockViewController;
 import application.entity.Bike;
 import application.entity.Dock;
+=======
+
+import static application.util.Setting.*;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.List;
+
+import application.controller.DockController;
+import application.controller.DockViewController;
+import application.dao.DockDAO;
+import application.entity.Bike;
+import application.entity.Dock;
+import application.util.DBConnection;
+>>>>>>> Stashed changes
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< Updated upstream
 import javafx.scene.layout.AnchorPane;
+=======
+>>>>>>> Stashed changes
 
 public class Main extends Application {
 	DockController dockController = new DockController();
@@ -25,6 +44,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+<<<<<<< Updated upstream
 		      File myFile = new File(INPUTFILE);
 //		      String currentPath = myFile.getAbsolutePath();
 //		      System.out.println("current path is: " + currentPath);
@@ -70,6 +90,17 @@ public class Main extends Application {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
+=======
+	        DockDAO dockDAO = new DockDAO();
+	        List<Dock> dockList = dockDAO.getAllDocks();
+	        for (Dock dock : dockList) {
+	            dockController.addDockToList(dock);
+	        }
+		} catch (Exception e) { 
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+>>>>>>> Stashed changes
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(DOCK_VIEW_FXML));
@@ -81,6 +112,10 @@ public class Main extends Application {
 			dockViewController = loader.getController();
 			dockViewController.setDockController(dockController);
 			dockViewController.displayDocks();
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

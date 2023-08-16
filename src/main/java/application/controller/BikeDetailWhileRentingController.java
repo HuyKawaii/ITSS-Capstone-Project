@@ -4,6 +4,10 @@ import application.entity.Bike;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+<<<<<<< Updated upstream
+=======
+import javafx.scene.Node;
+>>>>>>> Stashed changes
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -26,6 +30,12 @@ public class BikeDetailWhileRentingController {
         CreditCardController creditCardController = loader.getController();
         creditCardController.setBike(bike);
 
+<<<<<<< Updated upstream
+=======
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // Close the current stage
+
+>>>>>>> Stashed changes
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Credit Card information");

@@ -3,6 +3,7 @@ package application.entity;
 import java.util.Random;
 
 public class Bike {
+<<<<<<< Updated upstream
 	public enum BikeType{
 		StandardBike,
 		E_bike,
@@ -18,9 +19,21 @@ public class Bike {
 	private String bikeCode;
 	private String brand;
 	private boolean status;
+=======
+	protected int bikeId;
+	protected String bikeType;
+	protected String plate;
+	protected float price;
+	protected float rentingTime;
+	protected Dock dock;
+	protected String bikeCode;
+	protected String brand;
+	protected LocalDateTime rentedTime;
+	protected boolean status;
+>>>>>>> Stashed changes
 	
-	private static final float MAX_TIME = 120;
 	
+<<<<<<< Updated upstream
 	public Bike(int bikeType) {
 		this.bikeType = BikeType.values()[bikeType];
 		this.batteryPercentage = 100;
@@ -43,7 +56,42 @@ public class Bike {
 			default:
 				throw new IllegalArgumentException("Invalid bike type");
 		}
+=======
+	public Bike(String bikeType) {
+		this.bikeType = bikeType;
+		this.rentingTime = 0;
+		this.status=true;
+		setPrice();
+>>>>>>> Stashed changes
 	}
+	
+	public int getBikeId() {
+		return bikeId;
+	}
+
+	public void setBikeId(int bikeId) {
+		this.bikeId = bikeId;
+	}
+	
+    public String getBikeType() {
+        return "StandardBike";
+    }
+
+	public void setBikeType(String bikeType) {
+		this.bikeType = bikeType;
+	}
+	
+    public String getPlate() {
+        return plate;
+    }
+
+	public void setPlate(String plate) {
+		this.plate = plate;
+	}
+	
+    protected void setPrice() {
+        this.price = 400000.0f;
+    }
 	
 	public float getPrice() {
 		return price;
@@ -60,13 +108,9 @@ public class Bike {
 	public void setDock(Dock dock) {
 		this.dock = dock;
 	}
-
-	public BikeType getBikeType() {
-		return bikeType;
-	}
-
-	public void setBikeType(BikeType bikeType) {
-		this.bikeType = bikeType;
+	
+	public void removeFromDock() {
+	    this.dock = null;
 	}
 
 	public float getRentingTime() {
@@ -75,16 +119,6 @@ public class Bike {
 
 	public void setRentingTime(float rentingTime) {
 		this.rentingTime = rentingTime;
-		this.timeRemain = MAX_TIME - rentingTime;
-		this.batteryPercentage = (this.timeRemain / MAX_TIME) * 100;
-	}
-
-	public float getBatteryPercentage() {
-		return batteryPercentage;
-	}
-	
-	public void setBatteryPercentage(float batteryPercentage) {
-		this.batteryPercentage = batteryPercentage;
 	}
 
 	public boolean isStatus() {
@@ -106,7 +140,7 @@ public class Bike {
 		return fee;
 	}
 	public String getBikeStatus() {
-		return bikeType.toString() + "\n" + (bikeType == BikeType.E_bike ? batteryPercentage + "%\n" : "");
+		return bikeType.toString();
 	}
 	
 	public void generateBikeCode() {
@@ -131,6 +165,7 @@ public class Bike {
 		this.brand = brand;
 	}
 
+<<<<<<< Updated upstream
 	public float getTimeRemain() {
 		return timeRemain;
 	}
@@ -138,4 +173,37 @@ public class Bike {
 	public void setTimeRemain(int timeRemain) {
 		this.timeRemain = timeRemain;
 	}
+=======
+	public LocalDateTime getRentedTime() {
+	    return rentedTime;
+	}
+
+	public void setRentedTime(LocalDateTime rentedTime) {
+	    this.rentedTime = rentedTime;
+	}
+	
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	public double getRetingFee() {
+		double fee = 10000;
+		if (rentingTime > 30)
+			fee = Math.ceil((rentingTime - 30)/15) * 3000;
+		
+		return fee;
+	}
+	
+    public String getAdditionalInfo() {
+        return ""; // By default, no additional info for a generic Bike.
+    }
+>>>>>>> Stashed changes
 }

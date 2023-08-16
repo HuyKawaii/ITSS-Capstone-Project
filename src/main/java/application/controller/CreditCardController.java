@@ -8,6 +8,7 @@ import application.entity.CreditCard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -59,6 +60,12 @@ public class CreditCardController {
         PaymentTransactionController paymentTransactionController = loader.getController();
         paymentTransactionController.setPaymentTransaction(paymentTransaction);
 
+<<<<<<< Updated upstream
+=======
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // Close the current stage
+
+>>>>>>> Stashed changes
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Payment Transaction");

@@ -4,8 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.PaymentTransactionController">
    <bottom>
@@ -14,9 +19,26 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Back" />
-            <Label text="Payment Transaction" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Main Menu" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Back" />
+            <Label alignment="CENTER" prefHeight="39.0" prefWidth="484.0" text="Payment Transaction" textAlignment="CENTER">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant>
+                           <color>
+                              <Color red="0.9052631855010986" green="0.07040935754776001" blue="0.07040935754776001" />
+                           </color>
+                        </Light.Distant>
+                     </light>
+                  </Lighting>
+               </effect></Label>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Main Menu" />
          </children>
       </HBox>
    </top>

@@ -31,7 +31,7 @@
                         <Insets left="25.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="cardNumberField" />
+                  <TextField fx:id="cardNumberField" alignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -44,7 +44,7 @@
                         <Insets left="25.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="issuingBankField" />
+                  <TextField fx:id="issuingBankField" alignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -57,7 +57,7 @@
                         <Insets left="25.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="expirationDateField" />
+                  <TextField fx:id="expirationDateField" alignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -70,7 +70,7 @@
                         <Insets left="25.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="securityCodeField" />
+                  <TextField fx:id="securityCodeField" alignment="CENTER" />
                </children>
                <VBox.margin>
                   <Insets />

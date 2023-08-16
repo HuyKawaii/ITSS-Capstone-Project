@@ -1,6 +1,10 @@
 module application {
     requires javafx.controls;
     requires javafx.fxml;
+<<<<<<< Updated upstream
+=======
+    requires java.sql;
+>>>>>>> Stashed changes
 
 
     opens application to javafx.fxml, javafx.graphics;

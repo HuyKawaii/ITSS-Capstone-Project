@@ -41,16 +41,40 @@ public class BikeInfoViewController {
 
         String bikeInfo = "Brand: " + bike.getBrand() + "\n" +
                           "Type: " + bike.getBikeType() + "\n" +
-                          "Battery Percentage: " + bike.getBatteryPercentage() + "%\n" +
-                          "Estimated Time Remain: " + bike.getTimeRemain() + " minutes";
-        
+                          "License Plate: " + bike.getPlate() + "\n" +
+                          bike.getAdditionalInfo(); 
+
         bikeInfoTextArea.setText(bikeInfo);
+<<<<<<< Updated upstream
+=======
+        setImageBasedOnBikeType(bike.getBikeType());
+    }
+
+    
+    private void setImageBasedOnBikeType(String bikeType) {
+    	String imagePath = "/application/pictures/" + bikeType + ".png";
+        System.out.println("Loading image from: " + imagePath);
+        Image image = new Image(this.getClass().getResourceAsStream(imagePath));
+        bikeImage.setImage(image);
+>>>>>>> Stashed changes
     }
     
     @FXML 
     private void receiveCode(ActionEvent event) {
+<<<<<<< Updated upstream
     	bike.generateBikeCode();
         bikeCodeLabel.setText(bike.getBikeCode());
+=======
+        if (!hasCodeBeenReceived) {
+            bikeCodeLabel.setText(bike.getBikeCode());
+            hasCodeBeenReceived = true;
+//            System.out.println(bike.getDock().getDockId());
+        } else {
+            bikeController.generateBikeCode(bike);// Generate new code on second press
+            bikeController.updateBike(bike);
+            bikeCodeLabel.setText(bike.getBikeCode());
+        }
+>>>>>>> Stashed changes
     }
     
     @FXML

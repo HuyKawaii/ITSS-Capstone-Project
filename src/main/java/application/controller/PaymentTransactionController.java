@@ -7,6 +7,10 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+<<<<<<< Updated upstream
+=======
+import javafx.scene.Node;
+>>>>>>> Stashed changes
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -34,6 +38,11 @@ public class PaymentTransactionController {
         this.paymentTransaction = paymentTransaction;
         tblTransaction.getItems().add(this.paymentTransaction);
     }
+<<<<<<< Updated upstream
+=======
+    
+    private BikeController bikeController = new BikeController();
+>>>>>>> Stashed changes
 
     @FXML
     private TableView<PaymentTransaction> tblTransaction;
@@ -91,6 +100,10 @@ public class PaymentTransactionController {
             response = interbank.performTransaction(this.paymentTransaction, cardCode, owner, dateExpired, command, transactionContent, amount, createdAt);
             int errorCode = response.getErrorCode();
             if (errorCode == 0) {
+<<<<<<< Updated upstream
+=======
+            	bikeController.rentBike(this.paymentTransaction.getBike());
+>>>>>>> Stashed changes
                 paymentTransactionHistory.add(this.paymentTransaction);
                 response.getTransaction().getBike().setStatus(false);
                 System.out.println(paymentTransactionHistory.get(0).getBike().getDeposit());
@@ -115,6 +128,12 @@ public class PaymentTransactionController {
         ResponseController responseController = loader.getController();
         responseController.setResponse(response);
 
+<<<<<<< Updated upstream
+=======
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // Close the current stage
+
+>>>>>>> Stashed changes
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Response");

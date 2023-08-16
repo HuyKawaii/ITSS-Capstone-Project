@@ -1,11 +1,16 @@
 package application.controller;
+<<<<<<< Updated upstream
 import static application.entity.Bike.BikeType.StandardBike;
+=======
+//import static application.entity.Bike.BikeType.StandardBike;
+>>>>>>> Stashed changes
 import static application.util.Setting.*;
 
 import application.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -17,7 +22,11 @@ import java.io.IOException;
 
 
 public class BikeDetailViewController {
+<<<<<<< Updated upstream
     Bike bike = new Bike(1);
+=======
+	Bike bike = null;
+>>>>>>> Stashed changes
     @FXML
     private TableView<Bike> tblBikeDetail;
     @FXML
@@ -27,6 +36,11 @@ public class BikeDetailViewController {
 
     void displayBikeDetail(Bike bike) {
     	this.bike = bike;
+<<<<<<< Updated upstream
+=======
+    	tblBikeDetail.getItems().clear();  // Clear existing bike details.
+        tblBikeDetail.getItems().add(bike); // Add the new bike's details.
+>>>>>>> Stashed changes
 //        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 //        depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
 //        tblBikeDetail.getItems().add(bike);
@@ -35,7 +49,7 @@ public class BikeDetailViewController {
     void initialize() {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         depositColumn.setCellValueFactory(new PropertyValueFactory<>("deposit"));
-        tblBikeDetail.getItems().add(bike);
+//        tblBikeDetail.getItems().add(bike);
     }
     
     @FXML
@@ -45,6 +59,9 @@ public class BikeDetailViewController {
 
         CreditCardController creditCardController = loader.getController();
         creditCardController.setBike(bike);
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // Close the current stage
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
