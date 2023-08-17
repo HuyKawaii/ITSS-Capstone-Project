@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import application.util.OpenNewScene;
 
 import java.io.IOException;
 
@@ -42,16 +43,20 @@ public class BikeDetailViewController {
     
     @FXML
     void rentBike(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(CARD_INFORMATION_VIEW_FXML));
-        Parent root = loader.load();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource(CARD_INFORMATION_VIEW_FXML));
+    	FXMLLoader loader = OpenNewScene.inOldWindow(CARD_INFORMATION_VIEW_FXML, event, this);	
+    	
+        System.out.println("bike get rentedL: " + bike.getBikeId() + " type: " + bike.getBrand() + " rented time: " + bike.getRentedTime());	
+//        Parent root = loader.load();
+//        Parent root = loader.load();
 
         CreditCardController creditCardController = loader.getController();
         creditCardController.setBike(bike);
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Credit Card information");
-        stage.show();
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Credit Card information");
+//        stage.show();
     }
 
 

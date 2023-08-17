@@ -8,6 +8,10 @@ import java.util.Random;
 
 public class BikeController {
     private final BikeDAO dao;
+    
+    public BikeDAO getDao() {	
+	return dao;	
+    }
 
     public BikeController() {
         this.dao = new BikeDAO();

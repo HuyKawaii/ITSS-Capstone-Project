@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import application.util.OpenNewScene;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,12 +31,17 @@ public class PaymentTransactionController {
     protected PaymentTransaction paymentTransaction;
 
 
-    public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
-        this.paymentTransaction = paymentTransaction;
-        tblTransaction.getItems().add(this.paymentTransaction);
-    }
+    private Bike bike;	
+    double rentedFees;	
+    public void setPaymentTransaction(PaymentTransaction paymentTransaction, Bike bike, double rentedFees) {	
+        this.paymentTransaction = paymentTransaction;	
+        tblTransaction.getItems().add(this.paymentTransaction);	
+        this.bike = bike;	
+        this.rentedFees = rentedFees;	
+    }	
+
     
-    private BikeController bikeController = new BikeController();
+//    private BikeController bikeController = new BikeController();
 
     @FXML
     private TableView<PaymentTransaction> tblTransaction;
@@ -93,7 +99,9 @@ public class PaymentTransactionController {
             response = interbank.performTransaction(this.paymentTransaction, cardCode, owner, dateExpired, command, transactionContent, amount, createdAt);
             int errorCode = response.getErrorCode();
             if (errorCode == 0) {
-            	bikeController.rentBike(this.paymentTransaction.getBike());
+	            BikeController bControl = new BikeController();	
+            bControl.rentBike(bike);
+//            	bikeController.rentBike(this.paymentTransaction.getBike());
                 paymentTransactionHistory.add(this.paymentTransaction);
                 response.getTransaction().getBike().setStatus(false);
                 System.out.println(paymentTransactionHistory.get(0).getBike().getDeposit());
@@ -102,7 +110,8 @@ public class PaymentTransactionController {
         }
         else{
             String command = "refund";
-            double amount = this.paymentTransaction.getBike().getRetingFee();
+//            double amount = this.paymentTransaction.getBike().getRetingFee();
+            double amount = this.rentedFees;
             response = interbank.performTransaction(this.paymentTransaction, cardCode, owner, dateExpired, command, transactionContent, amount, createdAt);
             int errorCode = response.getErrorCode();
             if (errorCode == 0) {
@@ -112,16 +121,15 @@ public class PaymentTransactionController {
             }
         }
         // move to Response Screen
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(RESPONSE_VIEW_FXML));
-        Parent root = loader.load();
-
-        ResponseController responseController = loader.getController();
-        responseController.setResponse(response);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Response");
-        stage.show();
+    	//        FXMLLoader loader = new FXMLLoader(getClass().getResource(RESPONSE_VIEW_FXML));	
+        FXMLLoader loader = OpenNewScene.inOldWindow(RESPONSE_VIEW_FXML, event, this);	
+//        Parent root = loader.load();	
+        ResponseController responseController = loader.getController();	
+        responseController.setResponse(response, bike);	
+//        Stage stage = new Stage();	
+//        stage.setScene(new Scene(root));	
+//        stage.setTitle("Response");	
+//        stage.show();
     }
 
 
