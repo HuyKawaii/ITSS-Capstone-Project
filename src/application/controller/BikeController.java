@@ -56,8 +56,6 @@ public class BikeController {
             if (bike.getRentedTime() != null) {
                 Duration duration = Duration.between(bike.getRentedTime(), LocalDateTime.now());
                 
-                
-                
                 System.out.println("return moment: " + LocalDateTime.now());
                 float rentedDuration = (float) duration.toMinutes();
                 System.out.println("rented duration: " + rentedDuration);
