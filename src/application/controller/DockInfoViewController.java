@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -40,9 +41,29 @@ public class DockInfoViewController implements Initializable {
 			bikeInfoText[i].setText("");
 		}
 		for (int i = 0; i < listOfBikes.size(); i++) {
-			bikeInfoText[i].setText(listOfBikes.get(i).getBikeStatus());
-		}
+            Text bikeText = bikeInfoText[i];
+            bikeText.setText(listOfBikes.get(i).getBikeStatus());
+            Bike bike = listOfBikes.get(i);
+            bikeText.setOnMouseClicked(e -> {
+                try {
+                    showBikeInfo(bike, e);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+        }
 	}
+	
+	private void showBikeInfo(Bike bike, MouseEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(BIKE_INFO_VIEW_FXML));
+        Scene bikeInfoScene = new Scene(loader.load());
+        BikeInfoViewController controller = loader.getController();
+        controller.setPreviousScene(((Node) e.getSource()).getScene());
+        controller.displayBikeInfo(bike);
+        
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(bikeInfoScene);
+    }
 	
 	@FXML 
 	private void returnToDockList(ActionEvent event) throws IOException {

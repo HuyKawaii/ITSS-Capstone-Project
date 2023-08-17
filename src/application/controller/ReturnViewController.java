@@ -1,6 +1,9 @@
 package application.controller;
 
-import static application.util.Setting.*;
+import static application.util.Setting.DOCK_INFO_VIEW_FXML;
+import static application.util.Setting.HORIZONTAL_DISPLAY;
+import static application.util.Setting.NUMBER_OF_DOCKS;
+import static application.util.Setting.CARD_INFORMATION_VIEW_FXML;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.entity.Dock;
+import application.entity.Bike;
 import application.util.OpenNewScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class DockViewController implements Initializable {
+public class ReturnViewController implements Initializable{
 	@FXML
 	private Text tx00, tx01, tx02, tx03, tx04, tx05, tx06, tx07, tx08;
 	@FXML
@@ -35,7 +39,7 @@ public class DockViewController implements Initializable {
 	@FXML
 	private Button bt1;
 	
-	private DockController dockController;
+	private ReturnController returnController;
 	private int selectedRow = -1, selectedCol = -1;
 	
 	@Override
@@ -44,7 +48,7 @@ public class DockViewController implements Initializable {
 	};
 	
 	public void displayDocks() {
-		List<Dock> listOfDocks = dockController.getAllDock();
+		List<Dock> listOfDocks = returnController.getAllDock();
 		for (int i = 0; i < NUMBER_OF_DOCKS; i++) {
 			tx[i].setText("");
 		}
@@ -67,28 +71,39 @@ public class DockViewController implements Initializable {
 		}
 	}
 	
+	// may need this
 	@FXML
 	private void search() {
-		displayDocks(dockController.searchDocks(searchBarField.getText()));
+		displayDocks(returnController.searchDocks(searchBarField.getText()));
 		System.out.println("Searching\n");
 	}
 	
-	public void setDockController(DockController dockController) {
-		this.dockController = dockController;
+	public void setReturnController(ReturnController returnController) {
+		this.returnController = returnController;
 	}
 	
+	// no need this
 	@FXML
-	private void goToDockInfoView(ActionEvent event) throws IOException {
+	private void getChoosenDock(ActionEvent event) throws IOException {
 		int index = selectedRow * HORIZONTAL_DISPLAY + selectedCol;
-		if (index < 0 || index >= dockController.getAllDock().size())
+		if (index < 0 || index >= returnController.getAllDock().size())
 			return;
 		
-		Dock dock = dockController.getAllDock().get(index); 
+		Dock dock = returnController.getAllDock().get(index); 
+		Bike bike = returnController.getBike();
 		
-		FXMLLoader loader = OpenNewScene.inOldWindow(DOCK_INFO_VIEW_FXML, event, this);
-		DockInfoViewController dockInfoViewController = loader.getController();
-		dockInfoViewController.display(dock);
-		dockInfoViewController.setPreviosScene(searchButton.getScene());
+		System.out.println("bike info in return view: "+ bike.getBikeId() + " type: " + bike.getBrand() + " rented time: " + bike.getRentedTime());
+		double rentedFees = returnController.proceedReturnBike(dock);
+//		returnController.proceedReturnBike(dock, null);
+		
+		FXMLLoader loader = OpenNewScene.inOldWindow(CARD_INFORMATION_VIEW_FXML, event, this);
+//		DockInfoViewController dockInfoViewController = loader.getController();
+//		dockInfoViewController.display(dock);
+//		dockInfoViewController.setPreviosScene(searchButton.getScene());
+		CreditCardController creditCardController = loader.getController();
+        creditCardController.setBike(returnController.getBike());
+        creditCardController.setRentedFees(rentedFees);
+		
 	}
 	
 	@FXML
@@ -101,7 +116,6 @@ public class DockViewController implements Initializable {
         rowIndex = rowIndex == null ? 0 : rowIndex;
         System.out.printf("Clicked on cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
         selectedCol = colIndex;
-        selectedRow = rowIndex;
+        selectedRow = rowIndex;        
 	}
-	
 }
