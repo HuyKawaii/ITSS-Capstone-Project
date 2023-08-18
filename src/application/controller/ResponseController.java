@@ -1,6 +1,5 @@
 package application.controller;
 
-
 import static application.util.Setting.BIKE_DETAIL_WHILE_RENTING_VIEW_FXML;	
 import static application.util.Setting.DOCK_VIEW_FXML;	
 import java.io.IOException;	
@@ -15,25 +14,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-//import javafx.stage.Stage;
-//
-//import java.io.IOException;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//import static application.util.Setting.BIKE_DETAIL_WHILE_RENTING_VIEW_FXML;
-//import static application.util.Setting.DOCK_VIEW_FXML;
 
 public class ResponseController {
 
     protected Response response;
     private Bike bike;	
+    
     public void setResponse(Response response, Bike bike) {	
     this.response = response;	
     tblResponse.getItems().add(this.response);	
     this.bike = bike;	
 }
-
     @FXML
     private TableColumn<Response, Double> amount;
 
@@ -61,7 +52,6 @@ public class ResponseController {
     @FXML
     private TableColumn<Response, String> transactionId;
 
-
     @FXML
     void initialize() {
         errorCode.setCellValueFactory(new PropertyValueFactory<>("errorCode"));
@@ -72,35 +62,27 @@ public class ResponseController {
         transactionContent.setCellValueFactory(new PropertyValueFactory<>("transactionContent"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         createdAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-
-
     }
 
     @FXML
     void confirm(ActionEvent event) throws IOException {
 
         // move to BikeDetailWhileRenting Screen if error Code is success
-        if (this.response.getErrorCode() == 0 && this.response.getTransaction().getContent().equals("Rent") ) {
-        	//            FXMLLoader loader = new FXMLLoader(getClass().getResource(BIKE_DETAIL_WHILE_RENTING_VIEW_FXML));	
+        if (this.response.getErrorCode() == 0 && this.response.getTransaction().getContent().equals("Rent") ) {	
         	
             FXMLLoader loader = OpenNewScene.inOldWindow(BIKE_DETAIL_WHILE_RENTING_VIEW_FXML, event, this);	
-//            Parent root = loader.load();	
             BikeDetailWhileRentingController bikeDetailWhileRentingController = loader.getController();	
-            bikeDetailWhileRentingController.setBike(this.bike);	
-//            Stage stage = new Stage();	
-//            stage.setScene(new Scene(root));	
-//            stage.setTitle("Bike Detail while renting");	
-//            stage.show();	
+            bikeDetailWhileRentingController.setBike(this.bike);		
         }	
-        else {	
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource(DOCK_VIEW_FXML));	
+        else {		
+        	DockController dockController = new DockController();
+        	DockViewController dockViewController;
+        	
             FXMLLoader loader = OpenNewScene.inOldWindow(DOCK_VIEW_FXML, event, this);	
-            	
-//            Parent root = loader.load();	
-//            Stage stage = new Stage();	
-//            stage.setScene(new Scene(root));	
-//            stage.setTitle("EcoBike");	
-//            stage.show();
+            
+            dockViewController = loader.getController();
+			dockViewController.setDockController(dockController);
+			dockViewController.displayDocks();
         }
     }
 

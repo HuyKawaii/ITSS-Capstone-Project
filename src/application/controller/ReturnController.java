@@ -30,10 +30,12 @@ public class ReturnController{
 	public double proceedReturnBike(Dock dock) {
 //		System.out.println("proceed return bike");
 		BikeController bControl = new BikeController();
+		bike.setDock(dock);
 		bControl.returnBike(this.bike);
 		
 //		System.out.println("rented: " + bike.getRentedTime() + " renting: " + bike.getRentingTime());
 		float bikeDeposite = this.bike.getDeposit();
+	
 		return (double)returner.returnBike(bike, dock, bikeDeposite, null);
 	}
 	

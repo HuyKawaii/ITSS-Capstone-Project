@@ -13,10 +13,6 @@ public class BikeController {
 	return dao;	
     }
 
-    public BikeDAO getDao() {
-		return dao;
-	}
-
 	public BikeController() {
         this.dao = new BikeDAO();
     }

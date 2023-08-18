@@ -94,12 +94,9 @@ public class ReturnViewController implements Initializable{
 		
 		System.out.println("bike info in return view: "+ bike.getBikeId() + " type: " + bike.getBrand() + " rented time: " + bike.getRentedTime());
 		double rentedFees = returnController.proceedReturnBike(dock);
-//		returnController.proceedReturnBike(dock, null);
 		
 		FXMLLoader loader = OpenNewScene.inOldWindow(CARD_INFORMATION_VIEW_FXML, event, this);
-//		DockInfoViewController dockInfoViewController = loader.getController();
-//		dockInfoViewController.display(dock);
-//		dockInfoViewController.setPreviosScene(searchButton.getScene());
+
 		CreditCardController creditCardController = loader.getController();
         creditCardController.setBike(returnController.getBike());
         creditCardController.setRentedFees(rentedFees);

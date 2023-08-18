@@ -2,7 +2,7 @@ package application.controller;
 
 import application.dao.DockDAO;
 import application.entity.Bike;
-import application.entity.Bike.BikeType;
+//import application.entity.Bike.BikeType;
 import application.entity.Dock;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,16 +28,13 @@ public class BikeDetailWhileRentingController {
     void returnBike(ActionEvent event) throws IOException {
     	
         FXMLLoader loader = OpenNewScene.inOldWindow(RETURN_VIEW_FXML, event, this);
-        BikeType t1 = BikeType.E_bike;
-        BikeType t2 = BikeType.StandardBike;
-        BikeType t3 = BikeType.Twin_bike;
-        
+          
         IReturnBike returnBikeType;
-        if(bike.getBikeType().compareTo(t3) == 0) {
+        if(bike.getBikeType().compareTo("TwinBike") == 0) {
         	returnBikeType = new ReturnTwinBike();
-        }else if(bike.getBikeType().compareTo(t2) == 0) {
+        }else if(bike.getBikeType().compareTo("StandardBike") == 0) {
         	returnBikeType = new ReturnStdBike();
-        }else if(bike.getBikeType().compareTo(t1) == 0){
+        }else if(bike.getBikeType().compareTo("EBike") == 0){
         	returnBikeType = new ReturnEBike();
         }else {
         	returnBikeType = new ReturnStdBike();
@@ -45,12 +42,10 @@ public class BikeDetailWhileRentingController {
         
         System.out.print("running in return view\n");
         System.out.println("bike info: " + bike.getBikeId() + " type: " + bike.getBrand() + " rented time: " + bike.getRentedTime());
+        
         ReturnController returner = new ReturnController(returnBikeType, bike);
         ReturnViewController returnViewController;
         
-//		DockController dockController = new DockController();
-//		DockViewController dockViewController;
-		
 		try {
 	        DockDAO dockDAO = new DockDAO();
 	        List<Dock> dockList = dockDAO.getAllDocks();
@@ -65,11 +60,7 @@ public class BikeDetailWhileRentingController {
 		returnViewController = loader.getController();
 		returnViewController.setReturnController(returner);
 		returnViewController.displayDocks();
-        
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root));
-//        stage.setTitle("Choose Dock to return");
-//        stage.show();
+
     }
 
 }

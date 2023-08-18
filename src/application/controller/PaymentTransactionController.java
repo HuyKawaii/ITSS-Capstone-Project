@@ -40,9 +40,6 @@ public class PaymentTransactionController {
         this.rentedFees = rentedFees;	
     }	
 
-    
-//    private BikeController bikeController = new BikeController();
-
     @FXML
     private TableView<PaymentTransaction> tblTransaction;
     @FXML
@@ -87,14 +84,9 @@ public class PaymentTransactionController {
         String createdAt = currentDateTime.format(formatter);
         if (this.paymentTransaction.getBike().isStatus()) {
 //      Call API deduct Deposit
-
-
             String command = "pay"; // Get the command
 
             double amount = this.paymentTransaction.getBike().getDeposit(); // Get the amount
-
-
-
             // Call the performTransaction method
             response = interbank.performTransaction(this.paymentTransaction, cardCode, owner, dateExpired, command, transactionContent, amount, createdAt);
             int errorCode = response.getErrorCode();
@@ -106,7 +98,6 @@ public class PaymentTransactionController {
                 response.getTransaction().getBike().setStatus(false);
                 System.out.println(paymentTransactionHistory.get(0).getBike().getDeposit());
             }
-
         }
         else{
             String command = "refund";
@@ -120,16 +111,10 @@ public class PaymentTransactionController {
                 System.out.println(paymentTransactionHistory.get(0).getBike().getRetingFee());
             }
         }
-        // move to Response Screen
-    	//        FXMLLoader loader = new FXMLLoader(getClass().getResource(RESPONSE_VIEW_FXML));	
+        // move to Response Screen	
         FXMLLoader loader = OpenNewScene.inOldWindow(RESPONSE_VIEW_FXML, event, this);	
-//        Parent root = loader.load();	
         ResponseController responseController = loader.getController();	
         responseController.setResponse(response, bike);	
-//        Stage stage = new Stage();	
-//        stage.setScene(new Scene(root));	
-//        stage.setTitle("Response");	
-//        stage.show();
     }
 
 
