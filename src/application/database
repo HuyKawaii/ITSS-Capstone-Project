@@ -7,28 +7,31 @@ CREATE TABLE docks (
 
 CREATE TABLE bikes (
     bike_id SERIAL PRIMARY KEY,              
-    bikeType INTEGER NOT NULL,
-	price REAL,
+    bikeType VARCHAR(50) NOT NULL,
+    plate VARCHAR(10) UNIQUE,
+    price REAL,
     rentingTime REAL NOT NULL DEFAULT 0,  
     batteryPercentage REAL NOT NULL DEFAULT 100,
     timeRemain REAL NOT NULL DEFAULT 120,
     dockId INTEGER REFERENCES docks(dock_id),       
     bikeCode VARCHAR(6) UNIQUE,
     brand VARCHAR(255),
-    rentedTime TIMESTAMP WITHOUT TIME ZONE
+    rentedTime TIMESTAMP WITHOUT TIME ZONE,
+    status BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE OR REPLACE FUNCTION set_bike_price()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.bikeType = 1 THEN
-        NEW.price := 400000;
-    ELSIF NEW.bikeType = 2 THEN
-        NEW.price := 550000;
-    ELSIF NEW.bikeType = 3 THEN
+    IF NEW.bikeType = 'EBike' THEN  
         NEW.price := 700000;
+    ELSIF NEW.bikeType = 'TwinBike' THEN
+        NEW.price := 550000;
+    ELSIF NEW.bikeType = 'StandardBike' THEN
+        NEW.price := 400000;
     END IF;
-	NEW.bikeCode := LPAD(FLOOR(RANDOM() * 999999)::TEXT, 6, '0');
+    NEW.bikeCode := LPAD(FLOOR(RANDOM() * 999999)::TEXT, 6, '0');
+    NEW.plate := 'BIKE-' || LPAD(FLOOR(RANDOM() * 9999)::TEXT, 4, '0');
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -44,17 +47,18 @@ INSERT INTO docks (name, address) VALUES
 ('Dock3', '789 Street');
 
 INSERT INTO bikes (bikeType, dockId, brand) VALUES
-(1, 1, 'BrandX'),
-(1, 1, 'BrandX'),
-(2, 1, 'BrandY'),
-(3, 1, 'BrandZ'),
-(1, 2, 'BrandX'),
-(2, 2, 'BrandY'),
-(3, 2, 'BrandZ'),
-(1, 3, 'BrandA'),
-(1, 3, 'BrandA'),
-(3, 3, 'BrandB'),
-(3, 3, 'BrandC'),
-(2, 3, 'BrandB');
+('StandardBike', 1, 'BrandX'),
+('StandardBike', 1, 'BrandX'),
+('EBike', 1, 'BrandY'),
+('TwinBike', 1, 'BrandZ'),
+('StandardBike', 2, 'BrandX'),
+('EBike', 2, 'BrandY'),
+('TwinBike', 2, 'BrandZ'),
+('StandardBike', 3, 'BrandA'),
+('StandardBike', 3, 'BrandA'),
+('TwinBike', 3, 'BrandB'),
+('TwinBike', 3, 'BrandC'),
+('EBike', 3, 'BrandB');
 
-select * from bikes
+select * from bikes;
+

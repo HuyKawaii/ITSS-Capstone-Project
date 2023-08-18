@@ -1,6 +1,8 @@
 package application.dao;
 
 import application.entity.Dock;
+import application.entity.EBike;
+import application.entity.BikeFactory;
 import application.entity.Bike;
 import application.util.DBConnection;
 
@@ -24,6 +26,7 @@ public class DockDAO {
             ResultSet dockRs = dockPstmt.executeQuery();
             while (dockRs.next()) {
                 Dock dock = new Dock();
+                dock.setDockId(dockRs.getInt("dock_id"));
                 dock.setName(dockRs.getString("name"));
                 dock.setAddress(dockRs.getString("address"));
                 dock.setDockSize(dockRs.getInt("dock_size"));
@@ -43,19 +46,25 @@ public class DockDAO {
     private List<Bike> getBikesByDockId(int dockId) {
         List<Bike> bikes = new ArrayList<>();
         String bikesQuery = "SELECT * FROM bikes WHERE dockId = ?";
-
+        
+        BikeFactory bikeFactory = new BikeFactory();
+        
         try (Connection conn = DBConnection.getConnection();
             PreparedStatement bikesPstmt = conn.prepareStatement(bikesQuery)) {
 
             bikesPstmt.setInt(1, dockId);
             ResultSet bikesRs = bikesPstmt.executeQuery();
             while (bikesRs.next()) {
-                Bike bike = new Bike(bikesRs.getInt("bikeType"));
+            	String bikeType = bikesRs.getString("bikeType");
+                Bike bike = bikeFactory.createBike(bikeType);
                 bike.setBikeId(bikesRs.getInt("bike_id"));
+                bike.setPlate(bikesRs.getString("plate"));
                 bike.setPrice(bikesRs.getInt("price"));
                 bike.setRentingTime(bikesRs.getFloat("rentingTime"));
-                bike.setBatteryPercentage(bikesRs.getFloat("batteryPercentage"));
-                bike.setTimeRemain(bikesRs.getInt("timeRemain"));
+                if(bike instanceof EBike) {
+                    ((EBike)bike).setBatteryPercentage(bikesRs.getFloat("batteryPercentage"));
+                    ((EBike)bike).setTimeRemain(bikesRs.getFloat("timeRemain"));
+                }
                 bike.setBikeCode(bikesRs.getString("bikeCode"));
                 bike.setBrand(bikesRs.getString("brand"));
                 Timestamp ts = bikesRs.getTimestamp("rentedTime");

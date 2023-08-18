@@ -8,6 +8,10 @@ import java.util.Random;
 
 public class BikeController {
     private final BikeDAO dao;
+    
+    public BikeDAO getDao() {	
+	return dao;	
+    }
 
     public BikeDAO getDao() {
 		return dao;
@@ -44,6 +48,7 @@ public class BikeController {
     public void rentBike(Bike bike) {
         try {
             bike.setRentedTime(LocalDateTime.now());
+            bike.removeFromDock();
             generateBikeCode(bike);
             updateBike(bike);  
         } catch (Exception e) {
@@ -53,6 +58,7 @@ public class BikeController {
     
     public void returnBike(Bike bike) {
         try {
+//        	bike.setDock(chosenDock);
             if (bike.getRentedTime() != null) {
                 Duration duration = Duration.between(bike.getRentedTime(), LocalDateTime.now());
                 
@@ -62,8 +68,8 @@ public class BikeController {
                 
                 bike.setRentingTime(rentedDuration);
                 bike.setRentedTime(null);
-                updateBike(bike);
             }
+            updateBike(bike);
         } catch (Exception e) {
        
             e.printStackTrace();

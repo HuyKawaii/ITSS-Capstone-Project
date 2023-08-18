@@ -3,7 +3,6 @@ package application.controller;
 import static application.util.Setting.*;
 
 import application.entity.PaymentTransaction;
-import application.util.OpenNewScene;
 import application.entity.Bike;
 import application.entity.CreditCard;
 import javafx.event.ActionEvent;
@@ -14,22 +13,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import application.util.OpenNewScene;
 
 import java.io.IOException;
 
 public class CreditCardController {
 
     protected Bike bike;
-    
-    private double rentedFees;
-    public double getRentedFees() {
-		return rentedFees;
-	}
-
-	public void setRentedFees(double rentedFees) {
-		this.rentedFees = rentedFees;
-	}
-
+    private double rentedFees;	
+    public double getRentedFees() {	
+		return rentedFees;	
+	}	
+	public void setRentedFees(double rentedFees) {	
+		this.rentedFees = rentedFees;	
+	}	
 	@FXML
     private TextField cardHolderNameField;
     @FXML
@@ -64,19 +61,17 @@ public class CreditCardController {
         } else {
             paymentTransaction = new PaymentTransaction("Return", bike, card);
         }
-        
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource(PAYMENT_TRANSACTION_VIEW_FXML));
-        
-        FXMLLoader loader = OpenNewScene.inOldWindow(PAYMENT_TRANSACTION_VIEW_FXML, event, this);
-//        Parent root = loader.load();
-
-        PaymentTransactionController paymentTransactionController = loader.getController();
-        paymentTransactionController.setPaymentTransaction(paymentTransaction, bike, rentedFees);
-
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root));
-//        stage.setTitle("Payment Transaction");
-//        stage.show();
+    	
+//FXMLLoader loader = new FXMLLoader(getClass().getResource(PAYMENT_TRANSACTION_VIEW_FXML));	
+	
+FXMLLoader loader = OpenNewScene.inOldWindow(PAYMENT_TRANSACTION_VIEW_FXML, event, this);	
+//Parent root = loader.load();	
+PaymentTransactionController paymentTransactionController = loader.getController();	
+paymentTransactionController.setPaymentTransaction(paymentTransaction, bike, rentedFees);	
+//Stage stage = new Stage();	
+//stage.setScene(new Scene(root));	
+//stage.setTitle("Payment Transaction");	
+//stage.show();
 
 
 //                } else {
