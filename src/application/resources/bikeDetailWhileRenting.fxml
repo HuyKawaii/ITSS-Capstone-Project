@@ -2,10 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.BikeDetailWhileRentingController">
    <top>
@@ -15,14 +16,16 @@
       <VBox prefHeight="374.0" prefWidth="204.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Bike Detail" />
-            <TableView prefHeight="328.0" prefWidth="165.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
+            <TextArea fx:id="bikeInfoWhileRenting" prefHeight="200.0" prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#returnBike" text="Return Bike" />
+            <Label />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rent Time" />
+            <Label />
+            <Text fx:id="timer" strokeType="OUTSIDE" strokeWidth="0.0" text="Clock" wrappingWidth="84.07501220703125" />
          </children>
       </VBox>
    </right>
+   <center>
+      <ImageView fx:id="bikeImg" fitHeight="198.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

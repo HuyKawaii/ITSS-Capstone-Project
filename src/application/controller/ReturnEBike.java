@@ -14,7 +14,8 @@ public class ReturnEBike implements IReturnBike{
 		float returnMoney = deposite - rentAmount;
 		// calll deduce money api
 		
-		System.out.println("rent fee : " + rentAmount + "$");
+		System.out.println("\nrent fee : " + rentAmount + "$");
+		System.out.println("\nreturn money: " + returnMoney + " $");
 		dock.addBikeToDock(bike);
 		return returnMoney;
 	}

@@ -12,7 +12,8 @@ public class ReturnTwinBike implements IReturnBike{
 			rentAmount = 0; 
 		}
 		float returnMoney = deposite - rentAmount;
-		System.out.println("rent fee : " + rentAmount + "$");
+		System.out.println("\nrent fee : " + rentAmount + "$");
+		System.out.println("\nreturn money: " + returnMoney + " $");
 		dock.addBikeToDock(bike);
 		return returnMoney;
 	}

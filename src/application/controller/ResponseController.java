@@ -72,7 +72,9 @@ public class ResponseController {
         	
             FXMLLoader loader = OpenNewScene.inOldWindow(BIKE_DETAIL_WHILE_RENTING_VIEW_FXML, event, this);	
             BikeDetailWhileRentingController bikeDetailWhileRentingController = loader.getController();	
-            bikeDetailWhileRentingController.setBike(this.bike);		
+            bikeDetailWhileRentingController.setBike(this.bike);	
+            bikeDetailWhileRentingController.displayBikeInfo(bike);
+            bikeDetailWhileRentingController.startToCount();
         }	
         else {		
         	DockController dockController = new DockController();

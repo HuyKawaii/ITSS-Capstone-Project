@@ -12,8 +12,8 @@ public class ReturnStdBike implements IReturnBike{
 			rentAmount = 0; 
 		}
 		float returnMoney = deposite - rentAmount;
-		System.out.println("rent fee : " + rentAmount + "$");
-		System.out.println("deduct money of standard bike: " + returnMoney + " $");
+		System.out.println("\nrent fee : " + rentAmount + "$");
+		System.out.println("\nreturn money: " + returnMoney + " $");
 		// add bike to dock
 		dock.addBikeToDock(bike);
 		return returnMoney;
