@@ -5,6 +5,3 @@ public class DatabaseConfig {
     public static final String USER = "postgres";
     public static final String PASSWORD = "kytran";
 }
-
-
-

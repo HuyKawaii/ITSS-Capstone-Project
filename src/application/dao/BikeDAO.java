@@ -53,7 +53,7 @@ public class BikeDAO {
     }
 
     public void updateBike(Bike bike) {
-    	System.out.print(bike.getBikeCode());
+    	System.out.print("bike code : " + bike.getBikeCode());
         String query = "UPDATE bikes SET rentingTime = ?, batteryPercentage = ?, timeRemain = ?, bikeCode = ?, rentedTime = ? WHERE bike_id = ?";
 
         try (Connection conn = DBConnection.getConnection();

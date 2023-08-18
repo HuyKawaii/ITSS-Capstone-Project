@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 public class PaymentTransaction {
     private String content;
-    private double deposit;
-    private CreditCard cCard;
+    private Bike bike;
+    private CreditCard card;
 
-    public PaymentTransaction(String content, double deposit, CreditCard cCard) {
+    public PaymentTransaction(String content, Bike bike, CreditCard card) {
         this.content = content;
-        this.deposit = deposit;
-        this.cCard = cCard;
+        this.bike = bike;
+        this.card = card;
     }
     public String getContent() {
         return this.content;
     }
 
-    public double getDeposit() {
-        return this.deposit;
+    public Bike getBike() {
+        return this.bike;
+    }
+
+    public CreditCard getCard() {
+        return this.card;
     }
 }

@@ -2,7 +2,7 @@ package application.controller;
 import application.entity.*;
 
 public class ReturnTwinBike implements IReturnBike{
-	public void returnBike(Bike bike, Dock dock, float deposite, CreditCard crCard) {
+	public float returnBike(Bike bike, Dock dock, float deposite, CreditCard crCard) {
 		ICalculator calculator = new TwinBikeCalculator();
 		float rentTime = bike.getRentingTime();
 		float rentAmount = 0;
@@ -17,5 +17,7 @@ public class ReturnTwinBike implements IReturnBike{
 		System.out.println("rent fee : " + rentAmount + "$");
 		//		System.out.println("deduct money of standard bike: " + returnMoney + " $");
 		// add bike to dock
+		dock.addBikeToDock(bike);
+		return returnMoney;
 	}
 }

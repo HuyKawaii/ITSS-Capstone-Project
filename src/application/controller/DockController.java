@@ -26,7 +26,6 @@ public class DockController {
 				System.out.println("Found\n");
 				resultDocks.add(listOfDocks.get(i));
 			}
-				
 		}
 		return resultDocks;
 	}
