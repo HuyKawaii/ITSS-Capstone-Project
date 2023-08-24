@@ -65,7 +65,7 @@ public class BikeDetailWhileRentingController {
                           "Type: " + bike.getBikeType() + "\n" +
                           "License Plate: " + bike.getPlate() + "\n" +
                           "Renting time: " + formattedDateTime + "\n" + 
-                          "Remaining battery: 100%"  + "\n" +
+//                          "Remaining battery: 100%"  + "\n" +
                           bike.getAdditionalInfo(); 
 
         bikeInfoWhileRenting.setText(bikeInfo);

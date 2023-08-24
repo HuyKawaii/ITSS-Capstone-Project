@@ -66,13 +66,13 @@ public class BikeInfoViewController {
     @FXML 
     private void receiveCode(ActionEvent event) {
         if (!hasCodeBeenReceived) {
-            bikeCodeLabel.setText(bike.getBikeCode());
+            bikeCodeLabel.setText(bikeController.fetchBikeCode(bike));
             hasCodeBeenReceived = true;
 //            System.out.println(bike.getDock().getDockId());
         } else {
             bikeController.generateBikeCode(bike);// Generate new code on second press
             bikeController.updateBike(bike);
-            bikeCodeLabel.setText(bike.getBikeCode());
+            bikeCodeLabel.setText(bikeController.fetchBikeCode(bike));
         }
     }
     
@@ -80,12 +80,13 @@ public class BikeInfoViewController {
     private void sendCode(ActionEvent event) {
         String enteredCode = codeSearch.getText();
 
-        if (enteredCode.equals(bike.getBikeCode())) {
+        if (bikeController.compareCodes(enteredCode, bike)) {
             switchToRentSuccessScene(event);
         } else {
             messageLabel.setText("Wrong code. Please try again!");
         }
     }
+
 
     private void switchToRentSuccessScene(ActionEvent e) {
         try {

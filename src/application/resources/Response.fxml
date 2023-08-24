@@ -8,24 +8,24 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ResponseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ResponseController">
    <top>
-      <Label prefHeight="65.0" prefWidth="133.0" text="Response" BorderPane.alignment="CENTER">
+      <Label prefHeight="65.0" prefWidth="133.0" text="Response" textFill="#126f19" BorderPane.alignment="CENTER">
          <font>
-            <Font size="27.0" />
+            <Font name="Courier New Bold" size="27.0" />
          </font></Label>
    </top>
    <center>
-      <TableView fx:id="tblResponse" prefHeight="283.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblResponse" prefHeight="294.0" prefWidth="589.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="errorCode" prefWidth="75.0" text="Error code" />
           <TableColumn fx:id="cardCode" prefWidth="75.0" text="Card code" />
             <TableColumn fx:id="owner" prefWidth="75.0" text="Owner" />
             <TableColumn fx:id="expiratedDate" prefWidth="75.0" text="Expired date" />
-            <TableColumn fx:id="transactionId" prefWidth="75.0" text="Transaction ID" />
-            <TableColumn fx:id="transactionContent" prefWidth="75.0" text="Transaction content" />
-            <TableColumn fx:id="amount" prefWidth="75.0" text="Amount" />
-            <TableColumn fx:id="createdAt" prefWidth="75.0" text="Created at" />
+            <TableColumn fx:id="transactionId" prefWidth="87.0" text="Transaction ID" />
+            <TableColumn fx:id="transactionContent" prefWidth="123.0" text="Transaction content" />
+            <TableColumn fx:id="amount" minWidth="9.0" prefWidth="67.0" text="Amount" />
+            <TableColumn fx:id="createdAt" prefWidth="81.0" text="Created at" />
         </columns>
       </TableView>
    </center>
