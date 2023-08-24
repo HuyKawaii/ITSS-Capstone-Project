@@ -8,6 +8,8 @@ public class BikeFactory {
                 return new EBike();
             case "TwinBike":
                 return new TwinBike();
+            case "TwinEBike": 
+                return new TwinEBike();
             default:
                 return new Bike(bikeType);  
         }

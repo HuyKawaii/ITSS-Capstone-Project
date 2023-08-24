@@ -6,11 +6,9 @@ public class ReturnTwinBike implements IReturnBike{
 		ICalculator calculator = new TwinBikeCalculator();
 		float rentTime = bike.getRentingTime();
 		float rentAmount = 0;
-		if(rentTime >= 10) {
-			rentAmount = calculator.rentFees(rentTime);	
-		}else {
-			rentAmount = 0; 
-		}
+		
+		rentAmount = calculator.rentFees(rentTime);	
+		
 		float returnMoney = deposite - rentAmount;
 		System.out.println("\nrent fee : " + rentAmount + "$");
 		System.out.println("\nreturn money: " + returnMoney + " $");

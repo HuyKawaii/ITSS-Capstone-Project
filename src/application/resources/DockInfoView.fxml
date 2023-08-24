@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.DockInfoViewController">
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.DockInfoViewController">
    <children>
       <VBox prefHeight="338.0" prefWidth="360.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="62.0" prefWidth="360.0">
                <children>
-                  <Text fx:id="dockNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                   <Button fx:id="returnButton" alignment="CENTER" mnemonicParsing="false" onAction="#returnToDockList" text="Return" textAlignment="CENTER" />
+                  <Text fx:id="dockNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="239.13671875">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Text>
                </children>
             </HBox>
-            <GridPane prefHeight="342.0" prefWidth="445.0">
+            <GridPane prefHeight="262.0" prefWidth="360.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

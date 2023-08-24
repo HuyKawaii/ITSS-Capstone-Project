@@ -15,4 +15,5 @@ public final class Setting {
 	public static final String BIKE_DETAIL_WHILE_RENTING_VIEW_FXML = "/application/resources/bikeDetailWhileRenting.fxml";
 	public static final String RESPONSE_VIEW_FXML = "/application/resources/Response.fxml";
 	public static final String RETURN_VIEW_FXML = "/application/resources/ReturnView.fxml";
+	public static final String PAYMENT_TRANSACTION_RETURNING_VIEW_FXML = "/application/resources/PaymentTransactionReturning.fxml";
 }

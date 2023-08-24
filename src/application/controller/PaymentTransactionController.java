@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import application.util.OpenNewScene;
+import javafx.scene.Node;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -21,8 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static application.util.Setting.BIKE_DETAIL_WHILE_RENTING_VIEW_FXML;
-import static application.util.Setting.RESPONSE_VIEW_FXML;
+import static application.util.Setting.*;
 
 //import subsystem.interbank.TransactionProcess;
 
@@ -33,6 +33,7 @@ public class PaymentTransactionController {
 
     private Bike bike;	
     double rentedFees;	
+    String type;
     public void setPaymentTransaction(PaymentTransaction paymentTransaction, Bike bike, double rentedFees) {	
         this.paymentTransaction = paymentTransaction;	
         tblTransaction.getItems().add(this.paymentTransaction);	
@@ -116,6 +117,16 @@ public class PaymentTransactionController {
         ResponseController responseController = loader.getController();	
         responseController.setResponse(response, bike);	
     }
-
-
-}
+    public void returnToPreviousScene(ActionEvent event) throws IOException {	
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(CARD_INFORMATION_VIEW_FXML));	
+        Parent root = loader.load();	
+        CreditCardController creditCardController = loader.getController();	
+        creditCardController.setBike(this.bike);	
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();	
+        currentStage.close(); // Close the current stage	
+        Stage stage = new Stage();	
+        stage.setScene(new Scene(root));	
+        stage.setTitle("Credit Card Information");	
+        stage.show();	
+    }	
+}	

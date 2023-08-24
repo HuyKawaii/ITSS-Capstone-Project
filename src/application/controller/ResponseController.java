@@ -1,19 +1,21 @@
 package application.controller;
 
-import static application.util.Setting.BIKE_DETAIL_WHILE_RENTING_VIEW_FXML;	
-import static application.util.Setting.DOCK_VIEW_FXML;	
-import java.io.IOException;	
+import java.io.IOException;
 import application.entity.Bike;	
 import application.subsystem.Response;	
 import application.util.OpenNewScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import static application.util.Setting.*;
 
 public class ResponseController {
 
@@ -86,6 +88,22 @@ public class ResponseController {
 			dockViewController.setDockController(dockController);
 			dockViewController.displayDocks();
         }
+    }
+    @FXML
+    void returnToPreviousScene(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(CARD_INFORMATION_VIEW_FXML));
+        Parent root = loader.load();
+
+        CreditCardController creditCardController = loader.getController();
+        creditCardController.setBike(bike);
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close(); // Close the current stage
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Credit Card information");
+        stage.show();
     }
 
 }

@@ -13,12 +13,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import application.util.OpenNewScene;
+import javafx.scene.Node;
 
 import java.io.IOException;
 
 
 public class BikeDetailViewController {
 	Bike bike = null;
+    Scene previousScene;
     @FXML
     private TableView<Bike> tblBikeDetail;
     @FXML
@@ -58,6 +60,18 @@ public class BikeDetailViewController {
 //        stage.setTitle("Credit Card information");
 //        stage.show();
     }
-
+    @FXML	
+    void returnToPreviousScene(ActionEvent event) throws IOException {	
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(BIKE_INFO_VIEW_FXML));	
+        Parent root = loader.load();	
+        BikeInfoViewController bikeInfoViewController = loader.getController();	
+        bikeInfoViewController.displayBikeInfo(this.bike);	
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();	
+        currentStage.close(); // Close the current stage	
+        Stage stage = new Stage();	
+        stage.setScene(new Scene(root));	
+        stage.setTitle("");	
+        stage.show();	
+    }
 
 }
