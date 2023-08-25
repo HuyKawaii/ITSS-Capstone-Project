@@ -44,7 +44,11 @@ EXECUTE FUNCTION set_bike_price();
 INSERT INTO docks (name, address) VALUES
 ('Dock1', '123 Street'),
 ('Dock2', '456 Street'),
-('Dock3', '789 Street');
+('Dock3', '789 Street'),
+('Dock4', '101 Avenue'),
+('Dock5', '102 Lane'),
+('Dock6', '103 Blvd'),
+('Dock7', '104 Drive');
 
 INSERT INTO bikes (bikeType, dockId, brand) VALUES
 ('StandardBike', 1, 'BrandX'),
@@ -58,7 +62,32 @@ INSERT INTO bikes (bikeType, dockId, brand) VALUES
 ('StandardBike', 3, 'BrandA'),
 ('TwinBike', 3, 'BrandB'),
 ('TwinBike', 3, 'BrandC'),
-('EBike', 3, 'BrandB');
+('EBike', 3, 'BrandB'),
+('StandardBike', 4, 'BrandX'),
+('EBike', 4, 'BrandY'),
+('TwinBike', 4, 'BrandZ'),
+('StandardBike', 4, 'BrandX'),
+('EBike', 4, 'BrandY'),
+('StandardBike', 5, 'BrandX'),
+('StandardBike', 5, 'BrandX'),
+('TwinBike', 5, 'BrandZ'),
+('EBike', 5, 'BrandY'),
+('EBike', 5, 'BrandY'),
+('StandardBike', 6, 'BrandX'),
+('EBike', 6, 'BrandY'),
+('TwinBike', 6, 'BrandZ'),
+('TwinBike', 6, 'BrandZ'),
+('EBike', 6, 'BrandY'),
+('StandardBike', 6, 'BrandX'),
+('EBike', 6, 'BrandY'),
+('TwinBike', 6, 'BrandZ'),
+('TwinBike', 6, 'BrandZ'),
+('EBike', 6, 'BrandY'),
+('StandardBike', 7, 'BrandA'),
+('StandardBike', 7, 'BrandB'),
+('EBike', 7, 'BrandY'),
+('TwinBike', 7, 'BrandZ'),
+('StandardBike', 7, 'BrandA');
 
 select * from bikes;
 

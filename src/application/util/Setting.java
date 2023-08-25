@@ -16,4 +16,11 @@ public final class Setting {
 	public static final String RESPONSE_VIEW_FXML = "/application/resources/Response.fxml";
 	public static final String RETURN_VIEW_FXML = "/application/resources/ReturnView.fxml";
 	public static final String PAYMENT_TRANSACTION_RETURNING_VIEW_FXML = "/application/resources/PaymentTransactionReturning.fxml";
+	public static final int SUCCESS = 0;
+    public static final int INVALID_CARD = 1;
+    public static final int INSUFFICIENT_BALANCE = 2;
+    public static final int INTERNAL_SERVER_ERROR = 3;
+    public static final int SUSPECTED_FRAUD = 4;
+    public static final int INSUFFICIENT_INFORMATION = 5;
+    public static final int INVALID_AMOUNT = 7;
 }

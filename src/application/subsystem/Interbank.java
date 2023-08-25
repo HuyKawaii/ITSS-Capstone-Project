@@ -2,11 +2,12 @@ package application.subsystem;
 
 import application.entity.PaymentTransaction;
 
-public class Interbank {
+public class Interbank implements InterbankInterface {
 
+    @Override
     public Response performTransaction(PaymentTransaction transaction, String cardCode, String owner, String dateExpired, String command, String transactionContent, double amount, String createdAt) {
         // Simulate a simple transaction logic
-        boolean isSuccess = true; // For the sake of example, assume the transaction is successful
+        boolean isSuccess = true; // assume the transaction is successful
         int errorCode = isSuccess ? SUCCESS : INSUFFICIENT_BALANCE; // Assign an error code based on success
 
         String transactionId = "TXN123";

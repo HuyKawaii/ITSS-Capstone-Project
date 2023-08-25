@@ -22,7 +22,7 @@
    <right>
       <VBox prefHeight="374.0" prefWidth="476.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="62.0" prefWidth="186.0" text="Bike Detail">
+            <Label prefHeight="62.0" prefWidth="186.0" text="Bike Detail" textFill="#126f19" >
                <font>
                   <Font name="Courier New Bold" size="27.0" />
                </font></Label>
