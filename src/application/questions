@@ -1,0 +1,17 @@
+Does your design violate any SOLID principles? 
+At which levels of cohesion and coupling is it?
+
+How do you model classes for different kinds of bike? How do you map the corresponding
+tables from database to these classes? 
+How do you display different kinds of bike with different attributes?
+
+If we have new kind(s) of bike, how do your design and source code change? 
+Do they violate any SOLID principles?
+
+If we change the way to display the name of bike type, such as "Standard Bike" to "Xe đạp đơn", 
+how do your design and source code change? 
+Do they violate any SOLID principles?
+
+If we change the way to calculate the rental fee, e.g. change coefficients or 
+calculate by the whole day or half of day instead of by hour, how do your design 
+and source code change? Do they violate any SOLID principles?
